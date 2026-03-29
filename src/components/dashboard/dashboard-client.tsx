@@ -197,16 +197,28 @@ export function DashboardClient({ userEmail }: DashboardClientProps) {
       </section>
 
       <section className="mt-8">
-        <div className="mb-4">
+        <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
           <h2 className="text-2xl font-bold text-slate-900">Resultados</h2>
-          <p
-            className={`mt-2 text-sm ${
-              errorMessage ? "text-red-600" : "text-slate-600"
-            }`}
-          >
-            {resultLabel}
-          </p>
+          {plans.length > 0 && !isLoading && !errorMessage ? (
+            <p className="text-sm text-slate-500">
+              Mostrando {visiblePlans.length} de {plans.length} resultados
+            </p>
+          ) : null}
         </div>
+
+        <p
+          className={`mt-2 text-sm ${
+            errorMessage ? "text-red-600" : "text-slate-600"
+          }`}
+        >
+          {resultLabel}
+        </p>
+
+        {plans.length > 24 && !isLoading && !errorMessage ? (
+          <div className="mt-3 rounded-xl bg-slate-50 px-4 py-3 text-sm text-slate-600">
+            Se limita la vista inicial para evitar una grilla demasiado cargada.
+          </div>
+        ) : null}
 
         {warningMessage ? (
           <div className="mb-5 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-800">

@@ -12,7 +12,6 @@ function getSummaryValue(plan: NormalizedPlan, label: string) {
 export function PlanCard({ plan, onViewDetail }: PlanCardProps) {
   const planType = getSummaryValue(plan, "Plan Type");
   const frequency = getSummaryValue(plan, "Frecuencia");
-  const issueType = getSummaryValue(plan, "Issue Type");
 
   return (
     <article className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:shadow-md">
@@ -43,11 +42,6 @@ export function PlanCard({ plan, onViewDetail }: PlanCardProps) {
             {frequency}
           </span>
         ) : null}
-        {issueType !== "N/A" ? (
-          <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-700">
-            {issueType}
-          </span>
-        ) : null}
       </div>
 
       <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2">
@@ -65,12 +59,14 @@ export function PlanCard({ plan, onViewDetail }: PlanCardProps) {
           </p>
         </div>
 
-        <div className="rounded-xl bg-slate-50 p-4 sm:col-span-2">
-          <p className="text-sm text-slate-500">Cobertura / detalle</p>
-          <p className="mt-1 text-sm font-medium text-slate-900">
-            {plan.coverage}
-          </p>
-        </div>
+        {plan.coverage !== "N/A" ? (
+          <div className="rounded-xl bg-slate-50 p-4 sm:col-span-2">
+            <p className="text-sm text-slate-500">Cobertura / detalle</p>
+            <p className="mt-1 text-sm font-medium text-slate-900">
+              {plan.coverage}
+            </p>
+          </div>
+        ) : null}
       </div>
 
       {plan.summaryItems.length > 0 ? (

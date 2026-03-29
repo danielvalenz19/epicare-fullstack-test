@@ -242,7 +242,7 @@ function normalizePlan(item: unknown, index: number): NormalizedPlan {
   }
 
   const nestedRaw = getNestedRawRecord(item);
-  const sources = [item, nestedRaw];
+  const sources = [nestedRaw, item];
 
   const currency = getFirstDefinedValueFromSources(sources, ["currency"]);
   const id = formatValue(
@@ -267,17 +267,25 @@ function normalizePlan(item: unknown, index: number): NormalizedPlan {
     ]),
   );
 
-  const rawPrice = getFirstDefinedValueFromSources(sources, [
+  const primaryPrice = getFirstDefinedValueFromSources(sources, [
     "insuranceRate",
     "standardTierInsuranceRate",
     "rateExcludingMultiProductDiscounts",
     "monthlyPremium",
+  ]);
+
+  const fallbackPrice = getFirstDefinedValueFromSources(sources, [
     "premium",
     "rate",
     "totalRate",
   ]);
 
-  const price = formatCurrencyValue(rawPrice, currency);
+  const resolvedPrice =
+    primaryPrice !== undefined && primaryPrice !== null
+      ? primaryPrice
+      : fallbackPrice;
+
+  const price = formatCurrencyValue(resolvedPrice, currency);
 
   const provider = formatValue(
     getFirstDefinedValueFromSources(sources, [

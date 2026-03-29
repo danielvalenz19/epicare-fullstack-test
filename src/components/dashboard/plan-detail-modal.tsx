@@ -81,19 +81,28 @@ export function PlanDetailModal({
         className="max-h-[90vh] w-full max-w-5xl overflow-hidden rounded-2xl bg-white shadow-2xl"
         onClick={(event) => event.stopPropagation()}
       >
-        <div className="flex items-start justify-between gap-4 border-b border-slate-200 px-6 py-5">
-          <div>
+        <div className="sticky top-0 z-10 flex items-start justify-between gap-4 border-b border-slate-200 bg-white px-6 py-5">
+          <div className="min-w-0">
             <h2 className="text-2xl font-bold text-slate-900">{plan.name}</h2>
             <p className="mt-1 text-sm text-slate-600">{plan.provider}</p>
           </div>
 
-          <button
-            type="button"
-            onClick={onClose}
-            className="rounded-xl border border-slate-300 px-4 py-2 text-sm font-medium text-slate-800 transition hover:bg-slate-100"
-          >
-            Cerrar
-          </button>
+          <div className="flex shrink-0 items-center gap-3">
+            <div className="rounded-2xl bg-slate-900 px-4 py-2 text-right text-white">
+              <p className="text-xs uppercase tracking-wide text-slate-300">
+                Precio
+              </p>
+              <p className="text-lg font-semibold">{plan.price}</p>
+            </div>
+
+            <button
+              type="button"
+              onClick={onClose}
+              className="rounded-xl border border-slate-300 px-4 py-2 text-sm font-medium text-slate-800 transition hover:bg-slate-100"
+            >
+              Cerrar
+            </button>
+          </div>
         </div>
 
         <div className="max-h-[calc(90vh-88px)] overflow-y-auto px-6 py-6">
@@ -199,7 +208,7 @@ export function PlanDetailModal({
             </div>
           ) : null}
 
-          <details className="mt-6 rounded-2xl border border-slate-200 p-5">
+          <details className="mt-6 rounded-2xl border border-slate-200 bg-slate-50/70 p-5">
             <summary className="cursor-pointer text-sm font-medium text-slate-900">
               Ver JSON completo del plan
             </summary>

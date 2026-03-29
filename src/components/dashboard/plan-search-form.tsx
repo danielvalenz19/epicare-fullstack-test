@@ -115,6 +115,13 @@ export function PlanSearchForm({
           {isLoading ? "Buscando planes..." : "Buscar planes"}
         </button>
       </div>
+
+      <div className="md:col-span-2">
+        <div className="rounded-xl bg-slate-50 px-4 py-3 text-sm text-slate-600">
+          <p>Usá una fecha de nacimiento anterior a hoy.</p>
+          <p className="mt-1">Zip Code sugerido para pruebas: 68510.</p>
+        </div>
+      </div>
     </form>
   );
 }
