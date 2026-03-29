@@ -1,4 +1,5 @@
 import { logoutAction } from "@/app/actions/auth";
+import { DashboardClient } from "@/components/dashboard/dashboard-client";
 import { createClient } from "@/lib/supabase/server";
 
 export default async function DashboardPage() {
@@ -9,7 +10,7 @@ export default async function DashboardPage() {
 
   return (
     <main className="min-h-screen bg-slate-50 px-6 py-10">
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-7xl">
         <div className="mb-8 flex flex-col gap-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:flex-row sm:items-center sm:justify-between">
           <div>
             <h1 className="text-3xl font-bold text-slate-900">Dashboard</h1>
@@ -28,10 +29,7 @@ export default async function DashboardPage() {
           </form>
         </div>
 
-        <section className="rounded-2xl border border-dashed border-slate-300 bg-white p-8 text-slate-600 shadow-sm">
-          Aquí vamos a montar en la fase 3 el formulario de búsqueda de planes y
-          las cards de resultados.
-        </section>
+        <DashboardClient userEmail={user?.email ?? "usuario autenticado"} />
       </div>
     </main>
   );
